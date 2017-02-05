@@ -6,16 +6,30 @@
 //  Copyright © 2017 kN3TT3R. All rights reserved.
 //
 
+/*
+    DELEGATION PATTERN
+        - delegating object: nameTextField
+                ->  keeps a reference to the other object, the delegate, and at the appropriate time,
+                    the delegating object sends a message to the delegate.
+                ->  it has a protocol UITextFieldDelegate
+        - the message: 
+                -> tells the delegate object about an event that the delegating object is about to handle or has just handled.
+        - delegate object: ViewController
+                -> it is very common to make a view controller the delegate for objects that it manages.
+                -> it adopt the delegating object's protocol UITextFieldDelegate
+    
+    By adopting the UITextFieldDelegate protocol, you tell the compiler that the ViewController class can act as a valid text field delegate.
+    This means you can implement the protocol’s methods to handle text input, and you can assign instances of the ViewController class as
+    the delegate of the text field.
+ */
+
 import UIKit
 
-/*
-    By adopting the UITextFieldDelegate protocol, you tell the compiler that the ViewController class can act as a valid text field delegate. This means you can implement the protocol’s methods to handle text input, and you can assign instances of the ViewController class as the delegate of the text field.
-*/
 class ViewController: UIViewController, UITextFieldDelegate {
 
     
     // MARK: - Properties
-    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!      // is the delegating object
     @IBOutlet weak var mealNameLabel: UILabel!
     
     
@@ -24,14 +38,20 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
         
         // Handle the text field’s user input through delegate callbacks.
-        // It sets itself as the delegate of its nameTextField property.
+        // ViewController sets itself as the delegate of its nameTextField property.
         nameTextField.delegate = self
     }
     
     
     //MARK: UITextFieldDelegate
-        /*
-            You need to specify that the text field should resign its first-responder status when the user taps a button to end editing in the text field. You do this in the textFieldShouldReturn(_:) method, which gets called when the user taps Return (or in this case, Done) on the keyboard.
+        /*  
+            The UITextFieldDelegate protocol defines eight optional methods.
+            We will use textFieldShouldReturn, textFieldDidEndEditing
+     
+            You need to specify that the text field should resign its first-responder status 
+            when the user taps a button to end editing in the text field.
+            You do this in the textFieldShouldReturn(_:) method, which gets called 
+            when the user taps Return (or in this case, Done) on the keyboard.
         */
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         // Hide the keyboard.
@@ -40,7 +60,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
         /*
-            Because you resign first responder status in textFieldShouldReturn, the system calls this method just after calling textFieldShouldReturn.
+            Because you resign first responder status in textFieldShouldReturn,
+            the system calls this method just after calling textFieldShouldReturn.
+     
+            This method gives you a chance to read the information entered into the text field 
+            and do something with it. You’ll take the text that’s in the text field 
+            and use it to change the value of your label.
         */
     func textFieldDidEndEditing(_ textField: UITextField) {
         mealNameLabel.text = textField.text
@@ -52,6 +77,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
         mealNameLabel.text = "Default Text"
     }
     
+    
 }
+
 
 

@@ -33,6 +33,7 @@ class ViewController:   UIViewController,
     @IBOutlet weak var nameTextField: UITextField!      // is the delegating object
     @IBOutlet weak var mealNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var ratingControl: RatingControl!
     
     
     // MARK: - Overridden Functions
@@ -95,9 +96,6 @@ class ViewController:   UIViewController,
     
     
     // MARK: - Actions
-    @IBAction func setDefaultLabelText(_ sender: UIButton) {
-        mealNameLabel.text = "Default Text"
-    }
     
         /*
             GESTURE RECOGNIZER are objects that you attach to a view that allow Gesture recognizers interpret touches
@@ -122,6 +120,8 @@ class ViewController:   UIViewController,
         present(imagePickerController, animated: true, completion: nil)
 
     }
+    
+    
     
 }
 

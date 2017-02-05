@@ -18,19 +18,21 @@
                 -> it is very common to make a view controller the delegate for objects that it manages.
                 -> it adopt the delegating object's protocol UITextFieldDelegate
     
-    By adopting the UITextFieldDelegate protocol, you tell the compiler that the ViewController class can act as a valid text field delegate.
-    This means you can implement the protocol’s methods to handle text input, and you can assign instances of the ViewController class as
-    the delegate of the text field.
+        By adopting the UITextFieldDelegate protocol, you tell the compiler that the ViewController class 
+        can act as a valid text field delegate. This means you can implement the protocol’s methods to handle 
+        text input, and you can assign instances of the ViewController class as the delegate of the text field.
  */
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class ViewController:   UIViewController,
+                        UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
     // MARK: - Properties
     @IBOutlet weak var nameTextField: UITextField!      // is the delegating object
     @IBOutlet weak var mealNameLabel: UILabel!
+    @IBOutlet weak var photoImageView: UIImageView!
     
     
     // MARK: - Overridden Functions
@@ -44,6 +46,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     
     //MARK: UITextFieldDelegate
+    
         /*  
             The UITextFieldDelegate protocol defines eight optional methods.
             We will use textFieldShouldReturn, textFieldDidEndEditing
@@ -72,13 +75,65 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    //MARK: UIImagePickerControllerDelegate
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        // Dismiss the picker if the user canceled.
+        dismiss(animated: true, completion: nil)
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        // The info dictionary may contain multiple representations of the image. You want to use the original.
+        guard let selectedImage = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+            fatalError("Expected a dictionary containing an image, but was provided the following: \(info)")
+        }
+        
+        // Set photoImageView to display the selected image.
+        photoImageView.image = selectedImage
+        
+        // Dismiss the picker.
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     // MARK: - Actions
     @IBAction func setDefaultLabelText(_ sender: UIButton) {
         mealNameLabel.text = "Default Text"
     }
     
+        /*
+            GESTURE RECOGNIZER are objects that you attach to a view that allow Gesture recognizers interpret touches
+            to determine whether they correspond to a specific gesture, such as a swipe, pinch, or rotation. 
+            You can write an action method that is called when a gesture recognizer recognizes its assigned gesture, 
+            which is exactly what you need to do for the image view.
+        */
+    @IBAction func selectImageFromPhotoLibrary(_ sender: UITapGestureRecognizer) {
+            // Hide the keyboard so that if the user taps the image view while typing in the text field, 
+            // the keyboard is dismissed properly.
+        nameTextField.resignFirstResponder()
+        
+            // UIImagePickerController is a view controller that lets a user pick media from their photo library.
+        let imagePickerController = UIImagePickerController()
+        
+            // Only allow photos to be picked, not taken.
+        imagePickerController.sourceType = .photoLibrary
+        
+            // Make sure ViewController is notified when the user picks an image.
+        imagePickerController.delegate = self
+        
+        present(imagePickerController, animated: true, completion: nil)
+
+    }
     
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MealViewController.swift
 //  Foodtracker
 //
 //  Created by Kenneth Debruyn on 4/02/17.
@@ -25,13 +25,12 @@
 
 import UIKit
 
-class ViewController:   UIViewController,
+class MealViewController:   UIViewController,
                         UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
     // MARK: - Properties
     @IBOutlet weak var nameTextField: UITextField!      // is the delegating object
-    @IBOutlet weak var mealNameLabel: UILabel!
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
     
@@ -72,7 +71,6 @@ class ViewController:   UIViewController,
             and use it to change the value of your label.
         */
     func textFieldDidEndEditing(_ textField: UITextField) {
-        mealNameLabel.text = textField.text
     }
     
     

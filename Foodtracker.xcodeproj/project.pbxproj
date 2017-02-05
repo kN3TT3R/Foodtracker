@@ -17,6 +17,7 @@
 		4F3DA7031E4691230086A865 /* FoodtrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F3DA7021E4691230086A865 /* FoodtrackerUITests.swift */; };
 		4FDFEBC31E478AF4004F639F /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDFEBC21E478AF4004F639F /* RatingControl.swift */; };
 		4FDFEBC51E47A95C004F639F /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDFEBC41E47A95C004F639F /* Meal.swift */; };
+		4FDFEBC71E47B626004F639F /* MealTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDFEBC61E47B626004F639F /* MealTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		4F3DA7041E4691230086A865 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FDFEBC21E478AF4004F639F /* RatingControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		4FDFEBC41E47A95C004F639F /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		4FDFEBC61E47B626004F639F /* MealTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +110,7 @@
 				4FDFEBC21E478AF4004F639F /* RatingControl.swift */,
 				4F3DA6E11E4691230086A865 /* ViewController.swift */,
 				4F3DA6E31E4691230086A865 /* Main.storyboard */,
+				4FDFEBC61E47B626004F639F /* MealTableViewCell.swift */,
 				4F3DA6E91E4691230086A865 /* Assets.xcassets */,
 				4F3DA6EB1E4691230086A865 /* LaunchScreen.storyboard */,
 				4F3DA6EE1E4691230086A865 /* Info.plist */,
@@ -270,6 +273,7 @@
 			files = (
 				4FDFEBC51E47A95C004F639F /* Meal.swift in Sources */,
 				4FDFEBC31E478AF4004F639F /* RatingControl.swift in Sources */,
+				4FDFEBC71E47B626004F639F /* MealTableViewCell.swift in Sources */,
 				4F3DA6E81E4691230086A865 /* Foodtracker.xcdatamodeld in Sources */,
 				4F3DA6E21E4691230086A865 /* ViewController.swift in Sources */,
 				4F3DA6E01E4691230086A865 /* AppDelegate.swift in Sources */,

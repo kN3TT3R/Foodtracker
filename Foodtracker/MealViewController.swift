@@ -23,7 +23,10 @@
         text input, and you can assign instances of the ViewController class as the delegate of the text field.
  */
 
+
 import UIKit
+import os.log
+
 
 class MealViewController:   UIViewController,
                         UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -33,6 +36,16 @@ class MealViewController:   UIViewController,
     @IBOutlet weak var nameTextField: UITextField!      // is the delegating object
     @IBOutlet weak var photoImageView: UIImageView!
     @IBOutlet weak var ratingControl: RatingControl!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
+    
+    
+    /*
+     This value is either passed by `MealTableViewController` in `prepare(for:sender:)`
+     or constructed as part of adding a new meal.
+     */
+    var meal: Meal?
+    
+
     
     
     // MARK: - Overridden Functions
@@ -50,7 +63,6 @@ class MealViewController:   UIViewController,
         /*  
             The UITextFieldDelegate protocol defines eight optional methods.
             We will use textFieldShouldReturn, textFieldDidEndEditing
-     
             You need to specify that the text field should resign its first-responder status 
             when the user taps a button to end editing in the text field.
             You do this in the textFieldShouldReturn(_:) method, which gets called 
@@ -65,7 +77,6 @@ class MealViewController:   UIViewController,
         /*
             Because you resign first responder status in textFieldShouldReturn,
             the system calls this method just after calling textFieldShouldReturn.
-     
             This method gives you a chance to read the information entered into the text field 
             and do something with it. You’ll take the text that’s in the text field 
             and use it to change the value of your label.
@@ -90,6 +101,28 @@ class MealViewController:   UIViewController,
         
         // Dismiss the picker.
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - Navigation
+    
+    // This method lets you configure a view controller before it's presented.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        super.prepare(for: segue, sender: sender)
+        
+        // Configure the destination view controller only when the save button is pressed.
+        guard let button = sender as? UIBarButtonItem, button === saveButton else {
+            os_log("The save button was not pressed, cancelling", log: OSLog.default, type: .debug)
+            return
+        }
+        
+        let name = nameTextField.text ?? ""
+        let photo = photoImageView.image
+        let rating = ratingControl.rating
+        
+        // Set the meal to be passed to MealTableViewController after the unwind segue.
+        meal = Meal(name: name, photo: photo, rating: rating)
     }
     
     
